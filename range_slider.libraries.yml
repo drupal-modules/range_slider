@@ -1,4 +1,4 @@
-range_slider:
+element.rangeslider:
   version: VERSION
   css:
     componenets:
@@ -6,10 +6,9 @@ range_slider:
   js:
     js/range-slider.js: {}
   dependencies:
-    - core/drupal
-    - core/drupalSettings
     - core/jquery
     - core/jquery.once
+    - core/drupal
     - range_slider/libraries.rangeslider.js
 
 libraries.rangeslider.js:

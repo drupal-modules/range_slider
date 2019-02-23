@@ -8,7 +8,7 @@ use Drupal\Core\Render\Element\Range;
 /**
  * Provides a slider for input of a number within a specific range.
  *
- * Provides an HTML5 input element with type of "range".
+ * Wraps rangeslider.js around HTML5 range input element.
  *
  * Properties:
  * - #min: Minimum value (defaults to 0).
@@ -18,16 +18,16 @@ use Drupal\Core\Render\Element\Range;
  * Usage example:
  * @code
  * $form['quantity'] = array(
- *   '#type' => 'rangeslider_range',
+ *   '#type' => 'range_slider',
  *   '#title' => $this->t('Quantity'),
  * );
  * @endcode
  *
  * @see \Drupal\Core\Render\Element\Range
  *
- * @FormElement("rangeslider_range")
+ * @FormElement("range_slider")
  */
-class RangeSliderRange extends Range {
+class RangeSlider extends Range {
 
   /**
    * {@inheritdoc}
@@ -37,16 +37,16 @@ class RangeSliderRange extends Range {
     $class = get_class($this);
     return [
       '#process' => [
-        [$class, 'processRangeSliderRange'],
+        [$class, 'processRangeSlider'],
       ],
     ] + $info;
   }
 
   /**
-   * Processes a rangeslider range form element.
+   * Processes a rangeslider form element.
    */
-  public static function processRangeSliderRange(&$element, FormStateInterface $form_state, &$complete_form) {
-    $element['#attached']['library'][] = 'range_slider/range_slider';
+  public static function processRangeSlider(&$element, FormStateInterface $form_state, &$complete_form) {
+    $element['#attached']['library'][] = 'range_slider/element.rangeslider';
     return $element;
   }
 

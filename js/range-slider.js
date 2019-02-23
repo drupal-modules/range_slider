@@ -1,9 +1,19 @@
+/**
+ * @file
+ * Range slider behavior.
+ */
 (function ($, Drupal) {
-  Drupal.behaviors.rangeSliderRange = {
 
+  'use strict';
+
+  /**
+   * Process ranges_slider elements.
+   *
+   * @type {Drupal~behavior}
+   */
+  Drupal.behaviors.rangeSlider = {
     attach: function attach(context, settings) {
-      var $context = $(context);
-      $context.find('.form-type-rangeslider-range > input').once('rangeSliderRange').each(function () {
+      $(context).find('.form-type-range-slider > input').once('rangeSlider').each(function () {
         var $input = $(this);
         var rangesliderSettings = {
           polyfill : false,
@@ -17,12 +27,11 @@
         $input.rangeslider(rangesliderSettings);
       });
     },
-
     detach: function detach(context, settings, trigger) {
       if (trigger === 'unload') {
-        $(context).find('.form-type-rangeslider-range > input').findOnce('rangeSliderRange').rangeslider('destroy');
+        $(context).find('.form-type-range-slider > input').findOnce('rangeSlider').rangeslider('destroy');
       }
     }
-
   };
+
 })(jQuery, Drupal);

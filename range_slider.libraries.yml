@@ -9,6 +9,7 @@ element.rangeslider:
     - core/jquery
     - core/jquery.once
     - core/drupal
+    - core/drupalSettings
     - range_slider/libraries.rangeslider.js
 
 libraries.rangeslider.js:

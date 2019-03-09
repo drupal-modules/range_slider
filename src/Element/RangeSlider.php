@@ -3,6 +3,7 @@
 namespace Drupal\range_slider\Element;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\Range;
 
 /**
@@ -20,6 +21,8 @@ use Drupal\Core\Render\Element\Range;
  * $form['quantity'] = array(
  *   '#type' => 'range_slider',
  *   '#title' => $this->t('Quantity'),
+ *   '#data-orientation' => 'vertical',
+ *   '#output' => 'below',
  * );
  * @endcode
  *
@@ -33,21 +36,40 @@ class RangeSlider extends Range {
    * {@inheritdoc}
    */
   public function getInfo() {
-    $info = parent::getInfo();
-    $class = get_class($this);
     return [
       '#process' => [
-        [$class, 'processRangeSlider'],
+        [get_class($this), 'processRangeSlider'],
       ],
-    ] + $info;
+      '#data-orientation' => 'horizontal',
+      '#output' => FALSE,
+    ] + parent::getInfo();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function preRenderRange($element) {
+    $element = parent::preRenderRange($element);
+    Element::setAttributes($element, ['data-orientation']);
+    return $element;
   }
 
   /**
    * Processes a rangeslider form element.
    */
   public static function processRangeSlider(&$element, FormStateInterface $form_state, &$complete_form) {
+    if (isset($element['#output']) && in_array($element['#output'], self::getOutputTypes())) {
+      $element['#attached']['drupalSettings']['range_slider']['elements']['#' . $element['#id']]['output'] = $element['#output'];
+    }
     $element['#attached']['library'][] = 'range_slider/element.rangeslider';
     return $element;
+  }
+
+  /**
+   * Get output types.
+   */
+  private static function getOutputTypes() {
+    return ['below', 'above', 'left', 'right'];
   }
 
 }

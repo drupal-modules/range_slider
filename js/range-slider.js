@@ -16,7 +16,7 @@
       var elements = settings.range_slider && settings.range_slider.elements ? settings.range_slider.elements : null;
       $(context).find('.form-type-range-slider > input').once('rangeSlider').each(function () {
         var outputType = false;
-        if (typeof elements['#' + $(this).attr('id')] !== 'undefined') {
+        if (elements && typeof elements['#' + $(this).attr('id')] !== 'undefined') {
           outputType = elements['#' + $(this).attr('id')].output;
         }
         var rangesliderSettings = {
@@ -30,10 +30,9 @@
             }
           },
           onSlide : function (position, value) {
-            if (!outputType) {
-              return;
+            if ($.inArray(outputType, ['below', 'above']) !== -1) {
+              this.output.html(value);
             }
-            this.output.html(value);
           }
         };
         $(this).rangeslider(rangesliderSettings);

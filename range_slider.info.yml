@@ -2,5 +2,3 @@ name: Range Slider
 type: module
 description: Integration with http://rangeslider.js.org
 core: 8.x
-dependencies:
-  - webform:webform

@@ -1,7 +1,7 @@
 element.rangeslider:
   version: VERSION
   css:
-    componenets:
+    component:
       css/range-slider.css: {}
   js:
     js/range-slider.js: {}

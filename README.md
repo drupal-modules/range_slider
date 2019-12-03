@@ -1,7 +1,7 @@
 INTRODUCTION
 ------------
 
-Provides integration with http://rangeslider.js.org
+Provides integration with https://rangeslider.js.org
 
 INSTALLATION
 ------------

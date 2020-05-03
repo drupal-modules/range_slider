@@ -18,12 +18,12 @@ use Drupal\Core\Render\Element\Range;
  *
  * Usage example:
  * @code
- * $form['quantity'] = array(
+ * $form['quantity'] = [
  *   '#type' => 'range_slider',
  *   '#title' => $this->t('Quantity'),
  *   '#data-orientation' => 'vertical',
  *   '#output' => 'below',
- * );
+ * ];
  * @endcode
  *
  * @see \Drupal\Core\Render\Element\Range

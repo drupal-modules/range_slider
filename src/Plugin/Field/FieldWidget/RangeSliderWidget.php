@@ -5,7 +5,6 @@ namespace Drupal\range_slider\Plugin\Field\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\range_slider\RangeSliderConstants;
 use Drupal\range_slider\RangeSliderTrait;
 
 /**

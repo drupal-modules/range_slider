@@ -23,6 +23,8 @@ use Drupal\Core\Render\Element\Range;
  *   '#title' => $this->t('Quantity'),
  *   '#data-orientation' => 'vertical',
  *   '#output' => 'below',
+ *   '#output__field_prefix' => '$',
+ *   '#output__field_suffix' => 'USD',
  * ];
  * @endcode
  *
@@ -42,6 +44,8 @@ class RangeSlider extends Range {
       ],
       '#data-orientation' => 'horizontal',
       '#output' => FALSE,
+      '#output__field_prefix' => '',
+      '#output__field_suffix' => '',
     ] + parent::getInfo();
   }
 
@@ -60,6 +64,12 @@ class RangeSlider extends Range {
   public static function processRangeSlider(&$element, FormStateInterface $form_state, &$complete_form) {
     if (isset($element['#output']) && in_array($element['#output'], self::getOutputTypes())) {
       $element['#attached']['drupalSettings']['range_slider']['elements']['#' . $element['#id']]['output'] = $element['#output'];
+    }
+    if (isset($element['#output__field_prefix'])) {
+      $element['#attached']['drupalSettings']['range_slider']['elements']['#' . $element['#id']]['prefix'] = $element['#output__field_prefix'];
+    }
+    if (isset($element['#output__field_suffix'])) {
+      $element['#attached']['drupalSettings']['range_slider']['elements']['#' . $element['#id']]['suffix'] = $element['#output__field_suffix'];
     }
     $element['#attached']['library'][] = 'range_slider/element.rangeslider';
     return $element;

@@ -98,7 +98,7 @@ class RangeSliderWidget extends WidgetBase {
     $field_settings = $this->getFieldSettings();
     $widget_settings = $this->getSettings();
 
-    $element += [
+    $element['value'] = $element + [
       '#type' => 'range_slider',
       '#default_value' => $items[$delta]->value ?? NULL,
       '#data-orientation' => $widget_settings['orientation'] ?? 'horizontal',

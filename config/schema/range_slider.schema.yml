@@ -1,0 +1,10 @@
+field.widget.settings.range_slider:
+  type: mapping
+  label: 'Range Slider'
+  mapping:
+    orientation:
+      type: string
+      label: 'Orientation'
+    output:
+      type: string
+      label: 'Output'

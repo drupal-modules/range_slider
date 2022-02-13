@@ -34,8 +34,8 @@ class RangeSliderWidget extends WidgetBase {
    */
   public static function defaultSettings() {
     return [
-        'orientation' => 'horizontal',
-        'output' => self::OPTION_NONE,
+      'orientation' => 'horizontal',
+      'output' => self::OPTION_NONE,
     ] + parent::defaultSettings();
   }
 
@@ -54,7 +54,7 @@ class RangeSliderWidget extends WidgetBase {
     $element['output'] = [
       '#type' => 'select',
       '#options' => [
-          self::OPTION_NONE => $this->t('None'),
+        self::OPTION_NONE => $this->t('None'),
       ] + $this->getOutputOptions(),
       '#title' => $this->t('Output'),
       '#default_value' => $this->getSetting('output'),

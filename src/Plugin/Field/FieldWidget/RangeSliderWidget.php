@@ -107,10 +107,10 @@ class RangeSliderWidget extends WidgetBase {
 
     // Set minimum and maximum.
     if (is_numeric($field_settings['min'])) {
-      $element['#min'] = $field_settings['min'];
+      $element['value']['#min'] = $field_settings['min'];
     }
     if (is_numeric($field_settings['max'])) {
-      $element['#max'] = $field_settings['max'];
+      $element['value']['#max'] = $field_settings['max'];
     }
 
     return $element;

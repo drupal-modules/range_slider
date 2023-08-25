@@ -1,5 +1,4 @@
 name: Range Slider
 type: module
 description: Integration with https://rangeslider.js.org
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9.2 || ^10

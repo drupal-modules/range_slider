@@ -2,7 +2,7 @@
  * @file
  * Range slider behavior.
  */
-(function ($, Drupal) {
+(function ($, Drupal, once) {
 
   'use strict';
 
@@ -14,7 +14,7 @@
   Drupal.behaviors.rangeSlider = {
     attach: function attach(context, settings) {
       var elements = settings.range_slider && settings.range_slider.elements ? settings.range_slider.elements : null;
-      $(context).find('.form-type-range-slider input, .js-form-type-range-slider input').once('rangeSlider').each(function () {
+      $(once('rangeSlider', '.js-form-type-range-slider input', context)).each(function () {
         var outputType = false;
         var outputPrefix = '';
         var outputSuffix = '';
@@ -44,9 +44,12 @@
     },
     detach: function detach(context, settings, trigger) {
       if (trigger === 'unload') {
-        $(context).find('.form-type-range-slider input, .js-form-type-range-slider input').findOnce('rangeSlider').rangeslider('destroy');
+        const filteredElements = once.filter('rangeSlider','.js-form-type-range-slider input');
+        filteredElements.forEach(function () {
+          $(this).rangeslider('destroy');
+        })
       }
     }
   };
 
-})(jQuery, Drupal);
+}(jQuery, Drupal, once));

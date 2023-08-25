@@ -7,7 +7,7 @@ element.rangeslider:
     js/range-slider.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once
     - core/drupal
     - core/drupalSettings
     - range_slider/libraries.rangeslider.js

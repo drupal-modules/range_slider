@@ -35,6 +35,7 @@ class RangeSliderWidget extends WidgetBase {
   public static function defaultSettings() {
     return [
       'orientation' => 'horizontal',
+      'direction' => 'ltr',
       'output' => self::OPTION_NONE,
     ] + parent::defaultSettings();
   }
@@ -49,6 +50,14 @@ class RangeSliderWidget extends WidgetBase {
       '#title' => $this->t('Orientation'),
       '#default_value' => $this->getSetting('orientation'),
       '#required' => TRUE,
+    ];
+
+    $element['direction'] = [
+      '#type' => 'select',
+      '#options' => $this->getDirectionOptions(),
+      '#title' => $this->t('Direction'),
+      '#default_value' => $this->getSetting('direction'),
+      '#description' => $this->t('Text direction for the range slider.'),
     ];
 
     $element['output'] = [
@@ -79,6 +88,15 @@ class RangeSliderWidget extends WidgetBase {
       $summary[] = $this->t('No orientation');
     }
 
+    if (!empty($widget_settings['direction'])) {
+      $summary[] = $this->t('Direction: @direction', [
+        '@direction' => strtoupper($widget_settings['direction']),
+      ]);
+    }
+    else {
+      $summary[] = $this->t('No direction');
+    }
+
     if (!empty($widget_settings['output']) && $widget_settings['output'] !== self::OPTION_NONE) {
       $summary[] = $this->t('Output: @output', [
         '@output' => ucfirst($widget_settings['output']),
@@ -102,6 +120,7 @@ class RangeSliderWidget extends WidgetBase {
       '#type' => 'range_slider',
       '#default_value' => $items[$delta]->value ?? NULL,
       '#data-orientation' => $widget_settings['orientation'] ?? 'horizontal',
+      '#data-direction' => $widget_settings['direction'] ?? 'ltr',
       '#output' => $widget_settings['output'] === self::OPTION_NONE ? FALSE : $widget_settings['output'],
     ];
 

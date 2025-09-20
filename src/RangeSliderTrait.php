@@ -33,4 +33,14 @@ trait RangeSliderTrait {
     ];
   }
 
+  /**
+   * Get direction options.
+   */
+  public function getDirectionOptions() {
+    return [
+      'ltr' => $this->t('Left to Right (LTR)'),
+      'rtl' => $this->t('Right to Left (RTL)'),
+    ];
+  }
+
 }

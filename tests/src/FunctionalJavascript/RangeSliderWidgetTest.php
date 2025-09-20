@@ -78,6 +78,7 @@ class RangeSliderWidgetTest extends WebDriverTestBase {
 
     $widget_settings = [
       'orientation' => 'horizontal',
+      'direction' => 'ltr',
       'output' => 'above',
     ];
 

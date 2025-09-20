@@ -5,6 +5,9 @@ field.widget.settings.range_slider:
     orientation:
       type: string
       label: 'Orientation'
+    direction:
+      type: string
+      label: 'Direction'
     output:
       type: string
       label: 'Output'

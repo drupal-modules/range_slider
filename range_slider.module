@@ -26,3 +26,21 @@ function range_slider_help($route_name, RouteMatchInterface $route_match) {
   }
   return NULL;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function range_slider_theme() {
+  return [
+    'range_slider' => [
+      'render element' => 'element',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function range_slider_element_info_alter(array &$info) {
+  $info['range_slider']['#theme'] = 'range_slider';
+}

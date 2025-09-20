@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme template for range slider form element.
+ *
+ * Available variables:
+ * - element: The form element containing #attributes, #min, #max, etc.
+ */
+#}
+<range-slider
+  id="{{ element['#id'] }}"
+  name="{{ element['#name'] }}"
+  min="{{ element['#attributes']['min'] }}"
+  max="{{ element['#attributes']['max'] }}"
+  step="{{ element['#attributes']['step'] }}"
+  value="{{ element['#attributes']['value'] }}"
+  orientation="{{ element['#attributes']['data-orientation'] }}"
+  class="{{ element['#attributes']['class']|join(' ') }}"
+  {% if element['#attributes']['dir'] %}dir="{{ element['#attributes']['dir'] }}"{% endif %}
+  {% for key, value in element['#attributes'] %}
+    {% if key starts with 'data-' and key not in ['data-orientation', 'data-direction'] %}
+      {{ key }}="{{ value }}"
+    {% endif %}
+  {% endfor %}
+>
+  <div class="rangeslider__track" data-track></div>
+  <div class="rangeslider__fill" data-track-fill></div>
+  <div data-runnable-track>
+    <div class="rangeslider__handle" data-thumb></div>
+  </div>
+</range-slider>
+{# Hidden input for form submission compatibility #}
+<input type="hidden" name="{{ element['#name'] }}" value="{{ element['#value'] ?: '50' }}">

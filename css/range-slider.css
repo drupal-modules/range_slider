@@ -1,3 +1,34 @@
 .rangeslider {
+  --track-size: 0.2rem;
+  --thumb-size: 1.2rem;
+
+  border-radius: var(--track-size);
   margin: 15px 0;
+
+  &:not([orientation="vertical"]) {
+    inline-size: 100%;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  &[disabled] {
+    filter: grayscale(1);
+    opacity: 0.4;
+  }
+
+  [data-track] {
+    background-color: lightgray;
+    background-color: ButtonFace;
+  }
+
+  [data-track-fill] {
+    background-color: #0075ff;
+  }
+
+  [data-thumb] {
+    background-color: #0075ff;
+    border-radius: 100%;
+  }
 }

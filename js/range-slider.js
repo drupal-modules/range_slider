@@ -1,55 +1,72 @@
 /**
  * @file
- * Range slider behavior.
+ * Range slider behavior using range-slider-element.
  */
-(function ($, Drupal, once) {
+(function (Drupal, once) {
 
   'use strict';
 
   /**
-   * Process ranges_slider elements.
+   * Process range_slider elements.
    *
    * @type {Drupal~behavior}
    */
   Drupal.behaviors.rangeSlider = {
     attach: function attach(context, settings) {
-      var elements = settings.range_slider && settings.range_slider.elements ? settings.range_slider.elements : null;
-      $(once('rangeSlider', '.js-form-type-range-slider input', context)).each(function () {
-        var outputType = false;
-        var outputPrefix = '';
-        var outputSuffix = '';
-        if (elements && typeof elements['#' + $(this).attr('id')] !== 'undefined') {
-          outputType = elements['#' + $(this).attr('id')].output;
-          outputPrefix = elements['#' + $(this).attr('id')].prefix ? elements['#' + $(this).attr('id')].prefix : "";
-          outputSuffix = elements['#' + $(this).attr('id')].suffix ? elements['#' + $(this).attr('id')].suffix : "";
+      const elements = settings.range_slider && settings.range_slider.elements ? settings.range_slider.elements : null;
+
+      // Find range-slider elements that need enhancement
+      once('rangeSlider', 'range-slider', context).forEach(function (rangeSlider) {
+        const elementId = '#' + rangeSlider.id;
+        const config = elements && elements[elementId] ? elements[elementId] : {};
+
+        // Get output configuration
+        const outputType = config.output || false;
+        const outputPrefix = config.prefix || '';
+        const outputSuffix = config.suffix || '';
+
+        // Find the associated hidden input
+        const sliderName = rangeSlider.getAttribute('name');
+        const hiddenInput = sliderName ? rangeSlider.parentNode.querySelector('input[type="hidden"][name="' + sliderName + '"]') : null;
+
+        // Create output element if configured
+        let outputElement = null;
+        if (outputType && ['below', 'above', 'left', 'right'].includes(outputType)) {
+          outputElement = document.createElement('output');
+          outputElement.className = 'js-output';
+          outputElement.textContent = outputPrefix + (rangeSlider.value || '50') + outputSuffix;
+
+          // Position the output element
+          if (outputType === 'below') {
+            rangeSlider.parentNode.insertBefore(outputElement, rangeSlider.nextSibling);
+          } else if (outputType === 'above') {
+            rangeSlider.parentNode.insertBefore(outputElement, rangeSlider);
+          }
         }
-        var rangesliderSettings = {
-          polyfill : false,
-          onInit : function () {
-            if (outputType === 'below') {
-              this.output = $('<output class="js-output" />').insertAfter(this.$range).html(outputPrefix + this.$element.val() + outputSuffix);
-            }
-            else if (outputType === 'above') {
-              this.output = $('<output class="js-output" />').insertBefore(this.$range).html(outputPrefix + this.$element.val() + outputSuffix);
-            }
-          },
-          onSlide : function (position, value) {
-            if ($.inArray(outputType, ['below', 'above']) !== -1) {
-              this.output.html(outputPrefix + value + outputSuffix);
-            }
+
+        // Sync values on input and change events
+        const updateOutput = function() {
+          if (hiddenInput) {
+            hiddenInput.value = rangeSlider.value;
+          }
+          // Update output if present
+          if (outputElement) {
+            outputElement.textContent = outputPrefix + rangeSlider.value + outputSuffix;
           }
         };
-        $(this).rangeslider(rangesliderSettings);
+
+        // Listen for both input (drag) and change (keyboard/navigation) events
+        rangeSlider.addEventListener('input', updateOutput);
+        rangeSlider.addEventListener('change', updateOutput);
       });
     },
+
     detach: function detach(context, settings, trigger) {
       if (trigger === 'unload') {
-        const filteredElements = once.filter('rangeSlider','.js-form-type-range-slider input');
-        filteredElements.forEach(function () {
-          $(this).rangeslider('destroy');
-        })
+        // Clean up once data when elements are removed
+        once.remove('rangeSlider', 'range-slider', context);
       }
     }
   };
 
-}(jQuery, Drupal, once));
+}(Drupal, once));

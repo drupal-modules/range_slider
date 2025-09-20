@@ -6,23 +6,19 @@ element.rangeslider:
   js:
     js/range-slider.js: {}
   dependencies:
-    - core/jquery
     - core/once
     - core/drupal
     - core/drupalSettings
-    - range_slider/libraries.rangeslider.js
+    - range_slider/libraries.rangeslider_element
 
-libraries.rangeslider.js:
-  remote: https://github.com/andreruffert/rangeslider.js
-  version: '2.3.2'
+libraries.rangeslider_element:
+  version: '2.1.0'
   license:
     name: MIT
-    url: https://github.com/andreruffert/rangeslider.js/blob/master/LICENSE.md
+    url: https://github.com/andreruffert/range-slider-element/blob/main/LICENSE
     gpl-compatible: true
   css:
     component:
-      https://cdn.jsdelivr.net/npm/rangeslider.js@2.3.2/dist/rangeslider.css: { type: external }
+      https://cdn.jsdelivr.net/npm/range-slider-element@2.1.0/dist/range-slider-element.css: { type: external }
   js:
-    https://cdn.jsdelivr.net/npm/rangeslider.js@2.3.2/dist/rangeslider.min.js: { type: external, minified: true }
-  dependencies:
-    - core/jquery
+    https://cdn.jsdelivr.net/npm/range-slider-element@2.1.0/+esm: { type: external, attributes: { type: module } }

@@ -69,8 +69,8 @@ class RangeSlider extends Range {
 
     // Add direction class.
     if (!empty($element['#attributes']['data-direction'])) {
-      $direciton = $element['#attributes']['data-direction'];
-      $classes[] = 'rangeslider--' . $direciton;
+      $direction = $element['#attributes']['data-direction'];
+      $classes[] = 'rangeslider--' . $direction;
     }
 
     // Add any existing classes.

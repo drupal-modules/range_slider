@@ -16,12 +16,7 @@
   value="{{ element['#attributes']['value'] }}"
   orientation="{{ element['#attributes']['data-orientation'] }}"
   class="{{ element['#attributes']['class']|join(' ') }}"
-  {% if element['#attributes']['dir'] %}dir="{{ element['#attributes']['dir'] }}"{% endif %}
-  {% for key, value in element['#attributes'] %}
-    {% if key starts with 'data-' and key not in ['data-orientation', 'data-direction'] %}
-      {{ key }}="{{ value }}"
-    {% endif %}
-  {% endfor %}
+  {% if element['#attributes']['data-direction'] %}dir="{{ element['#attributes']['data-direction'] }}"{% endif %}
 >
   <div class="rangeslider__track" data-track></div>
   <div class="rangeslider__fill" data-track-fill></div>

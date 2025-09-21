@@ -22,6 +22,7 @@ use Drupal\Core\Render\Element\Range;
  *   '#type' => 'range_slider',
  *   '#title' => $this->t('Quantity'),
  *   '#data-orientation' => 'vertical',
+ *   '#data-direction' => 'rtl',
  *   '#output' => 'below',
  *   '#output__field_prefix' => '$',
  *   '#output__field_suffix' => 'USD',
@@ -43,6 +44,7 @@ class RangeSlider extends Range {
         [get_class($this), 'processRangeSlider'],
       ],
       '#data-orientation' => 'horizontal',
+      '#data-direction' => '',
       '#output' => FALSE,
       '#output__field_prefix' => '',
       '#output__field_suffix' => '',
@@ -65,6 +67,12 @@ class RangeSlider extends Range {
       $classes[] = 'rangeslider--' . $orientation;
     }
 
+    // Add direction class.
+    if (!empty($element['#attributes']['data-direction'])) {
+      $direciton = $element['#attributes']['data-direction'];
+      $classes[] = 'rangeslider--' . $direciton;
+    }
+
     // Add any existing classes.
     if (!empty($element['#attributes']['class'])) {
       if (is_array($element['#attributes']['class'])) {
@@ -76,11 +84,6 @@ class RangeSlider extends Range {
 
     // Set the classes on the element.
     $element['#attributes']['class'] = $classes;
-
-    // Set dir attribute if not ltr
-    if (!empty($element['#attributes']['data-direction']) && $element['#attributes']['data-direction'] !== 'ltr') {
-      $element['#attributes']['dir'] = $element['#attributes']['data-direction'];
-    }
 
     return $element;
   }

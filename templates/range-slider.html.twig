@@ -7,13 +7,7 @@
  * - element: The form element containing #attributes, #min, #max, etc.
  */
 #}
-<range-slider
-  id="{{ element['#id'] }}"
-  name="{{ element['#name'] }}"
-  min="{{ element['#attributes']['min'] }}"
-  max="{{ element['#attributes']['max'] }}"
-  step="{{ element['#attributes']['step'] }}"
-  value="{{ element['#attributes']['value'] }}"
+<range-slider{{ attributes }}
   orientation="{{ element['#attributes']['data-orientation'] }}"
   class="{{ element['#attributes']['class']|join(' ') }}"
   {% if element['#attributes']['data-direction'] %}dir="{{ element['#attributes']['data-direction'] }}"{% endif %}
@@ -24,5 +18,3 @@
     <div class="rangeslider__handle" data-thumb></div>
   </div>
 </range-slider>
-{# Hidden input for form submission compatibility #}
-<input type="hidden" name="{{ element['#name'] }}" value="{{ element['#value'] ?: '50' }}">

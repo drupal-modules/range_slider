@@ -40,7 +40,8 @@ class RangeSlider extends Range {
   public function getInfo() {
     return [
       '#process' => [
-        [get_class($this), 'processRangeSlider'],
+        [static::class, 'processRangeSlider'],
+        [static::class, 'processAjaxForm'],
       ],
       '#data-orientation' => 'horizontal',
       '#output' => FALSE,

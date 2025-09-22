@@ -1,4 +1,4 @@
 name: Range Slider
 type: module
-description: Integration with https://rangeslider.js.org
+description: Integration with <range-slider> element - Web Component
 core_version_requirement: '>=9.2'

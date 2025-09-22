@@ -119,8 +119,8 @@ class RangeSliderWidget extends WidgetBase {
     $element['value'] = $element + [
       '#type' => 'range_slider',
       '#default_value' => $items[$delta]->value ?? NULL,
-      '#data-orientation' => $widget_settings['orientation'] ?? 'horizontal',
-      '#data-direction' => $widget_settings['direction'] ?? 'ltr',
+      '#orientation' => $widget_settings['orientation'] ?? 'horizontal',
+      '#dir' => $widget_settings['direction'] ?? 'ltr',
       '#output' => $widget_settings['output'] === self::OPTION_NONE ? FALSE : $widget_settings['output'],
     ];
 

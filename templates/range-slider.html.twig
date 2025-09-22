@@ -7,11 +7,7 @@
  * - element: The form element containing #attributes, #min, #max, etc.
  */
 #}
-<range-slider{{ attributes }}
-  orientation="{{ element['#attributes']['data-orientation'] }}"
-  class="{{ element['#attributes']['class']|join(' ') }}"
-  {% if element['#attributes']['data-direction'] %}dir="{{ element['#attributes']['data-direction'] }}"{% endif %}
->
+<range-slider{{ attributes }}>
   <div class="rangeslider__track" data-track></div>
   <div class="rangeslider__fill" data-track-fill></div>
   <div data-runnable-track>

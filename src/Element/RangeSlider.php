@@ -9,7 +9,7 @@ use Drupal\Core\Render\Element\Range;
 /**
  * Provides a slider for input of a number within a specific range.
  *
- * Wraps rangeslider.js around HTML5 range input element.
+ * Wraps <range-slider> element around HTML5 range input element.
  *
  * Properties:
  * - #min: Minimum value (defaults to 0).
@@ -21,8 +21,8 @@ use Drupal\Core\Render\Element\Range;
  * $form['quantity'] = [
  *   '#type' => 'range_slider',
  *   '#title' => $this->t('Quantity'),
- *   '#data-orientation' => 'vertical',
- *   '#data-direction' => 'rtl',
+ *   '#orientation' => 'vertical',
+ *   '#dir' => 'rtl',
  *   '#output' => 'below',
  *   '#output__field_prefix' => '$',
  *   '#output__field_suffix' => 'USD',
@@ -44,8 +44,9 @@ class RangeSlider extends Range {
         [static::class, 'processRangeSlider'],
         [static::class, 'processAjaxForm'],
       ],
-      '#data-orientation' => 'horizontal',
-      '#data-direction' => '',
+      '#data-orientation' => 'horizontal', // Backwards compatibility with v2.x.
+      '#orientation' => 'horizontal',
+      '#dir' => '',
       '#output' => FALSE,
       '#output__field_prefix' => '',
       '#output__field_suffix' => '',
@@ -57,20 +58,26 @@ class RangeSlider extends Range {
    */
   public static function preRenderRange($element) {
     $element = parent::preRenderRange($element);
-    Element::setAttributes($element, ['data-orientation', 'data-direction']);
+
+    // Backwards compatibility with v2.x.
+    if ($element['#orientation'] !== $element['#data-orientation']
+     && $element['#data-orientation'] === 'vertical') {
+      $element['#orientation'] = $element['#data-orientation'];
+    }
+    Element::setAttributes($element, ['orientation', 'dir']);
 
     // Add rangeslider classes for backward compatibility with v2.x.
     $classes = ['rangeslider'];
 
     // Add orientation class.
-    if (!empty($element['#attributes']['data-orientation'])) {
-      $orientation = $element['#attributes']['data-orientation'];
+    if (!empty($element['#attributes']['orientation'])) {
+      $orientation = $element['#attributes']['orientation'];
       $classes[] = 'rangeslider--' . $orientation;
     }
 
     // Add direction class.
-    if (!empty($element['#attributes']['data-direction'])) {
-      $direction = $element['#attributes']['data-direction'];
+    if (!empty($element['#attributes']['dir'])) {
+      $direction = $element['#attributes']['dir'];
       $classes[] = 'rangeslider--' . $direction;
     }
 
@@ -78,7 +85,8 @@ class RangeSlider extends Range {
     if (!empty($element['#attributes']['class'])) {
       if (is_array($element['#attributes']['class'])) {
         $classes = array_merge($classes, $element['#attributes']['class']);
-      } else {
+      }
+      else {
         $classes[] = $element['#attributes']['class'];
       }
     }

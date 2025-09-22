@@ -25,10 +25,6 @@
         const outputPrefix = config.prefix || '';
         const outputSuffix = config.suffix || '';
 
-        // Find the associated hidden input
-        const sliderName = rangeSlider.getAttribute('name');
-        const hiddenInput = sliderName ? rangeSlider.parentNode.querySelector('input[type="hidden"][name="' + sliderName + '"]') : null;
-
         // Create output element if configured
         let outputElement = null;
         if (outputType && ['below', 'above', 'left', 'right'].includes(outputType)) {
@@ -46,9 +42,6 @@
 
         // Sync values on input and change events
         const updateOutput = function() {
-          if (hiddenInput) {
-            hiddenInput.value = rangeSlider.value;
-          }
           // Update output if present
           if (outputElement) {
             outputElement.textContent = outputPrefix + rangeSlider.value + outputSuffix;

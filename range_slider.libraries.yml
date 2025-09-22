@@ -12,13 +12,13 @@ element.rangeslider:
     - range_slider/libraries.rangeslider_element
 
 libraries.rangeslider_element:
-  version: '2.1.0'
+  version: '2.1.1'
   license:
     name: MIT
     url: https://github.com/andreruffert/range-slider-element/blob/main/LICENSE
     gpl-compatible: true
   css:
     component:
-      https://cdn.jsdelivr.net/npm/range-slider-element@2.1.0/dist/range-slider-element.css: { type: external }
+      https://cdn.jsdelivr.net/npm/range-slider-element@2.1.1/dist/range-slider-element.css: { type: external }
   js:
-    https://cdn.jsdelivr.net/npm/range-slider-element@2.1.0/+esm: { type: external, attributes: { type: module } }
+    https://cdn.jsdelivr.net/npm/range-slider-element@2.1.1/+esm: { type: external, attributes: { type: module } }

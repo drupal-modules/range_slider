@@ -44,6 +44,7 @@ class RangeSlider extends Range {
         [static::class, 'processRangeSlider'],
         [static::class, 'processAjaxForm'],
       ],
+      '#theme' => 'range_slider',
       '#data-orientation' => 'horizontal', // Backwards compatibility with v2.x.
       '#orientation' => 'horizontal',
       '#dir' => '',

@@ -37,10 +37,3 @@ function range_slider_theme() {
     ],
   ];
 }
-
-/**
- * Implements hook_element_info_alter().
- */
-function range_slider_element_info_alter(array &$info) {
-  $info['range_slider']['#theme'] = 'range_slider';
-}

@@ -1,0 +1,6 @@
+range_slider_test.form:
+  title: 'Range Slider Test'
+  description: 'Test the range slider form element'
+  route_name: range_slider_test.form
+  menu_name: main
+  weight: 0

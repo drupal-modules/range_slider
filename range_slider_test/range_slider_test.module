@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Range Slider Test module file.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function range_slider_test_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.range_slider_test':
+      return '<p>' . t('The Range Slider Test module provides testing functionality for the range slider form element.') . '</p>';
+  }
+}

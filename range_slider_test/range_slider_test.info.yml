@@ -1,0 +1,6 @@
+name: 'Range Slider Test'
+type: module
+description: 'Test module for range slider form element functionality.'
+core_version_requirement: '>=9.2'
+dependencies:
+  - range_slider:range_slider

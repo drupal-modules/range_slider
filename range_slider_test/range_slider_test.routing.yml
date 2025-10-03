@@ -1,0 +1,7 @@
+range_slider_test.form:
+  path: '/range-slider-test'
+  defaults:
+    _form: '\Drupal\range_slider_test\Form\RangeSliderTestForm'
+    _title: 'Range Slider Test'
+  requirements:
+    _permission: 'access content'
